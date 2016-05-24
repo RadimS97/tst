@@ -1,0 +1,65 @@
+NAME
+	pyp2rpm    - Tool which convert a package from PyPI to RPM specfile or SRPM.
+
+
+SYNOPSIS
+	pyp2rpm [OPTIONS] PACKAGE
+
+ARGUMENTS
+	PACKAGE		- Provide PyPI name of the package or path to compressed source file.
+
+DESCRIPTION
+	Convector wich convert Python package to RPM SPECFILES. The package can be download from PyPI and the produced SPEC is in line with Fedora packaging Guidelines
+	or Mageia Python Policy.
+	Users can provide their own templates for rendering the package metadata. Both the package source and metadata can be extracted from PyPI
+	or from local filesystem (local file doesn't provide that much information though).	
+
+
+OPTIONS
+	-t TEMPLATE
+		Template file(jinja2 format) to render (default: "fedora").
+		Search order is: 1) filesystem
+				 2) default templates
+
+	-v VERSION
+		Version of the package to download (ignored for local files)
+	
+	-d SAVE_DIR
+		Where to save the package file (default: "~/rpmbuild")
+
+	-r RPM_NAME
+		Name of rpm package (overrides calculated name)
+
+	-o DISTRO
+		Default distro whose conversion rules to use (default: "fedora"). Default templates have their rules associated andd ignore this.
+
+	-b BASE_PYTHON
+		Base Python version to package for (default: "2")
+	
+	-p PYTHON_VERSIONS
+		Additional Python versions to include in the specfile (e.g -p3 for %{?with_python3}. Specify additional version or use -b explicitly to disable default.
+
+	-srpm
+		When used pyp2rpm will produce srpm instead of printing specfile into sdout.
+
+	--proxy PROXY
+		Specify proxy in the form proxy.server:port
+
+	--venv / --no-venv
+		Enable / disable metadata extraction from virtualenv
+
+	-h, --help
+		show this help message and exit
+
+USAGE
+	pyp2rpm [-h] [-v VERSION] [-d SAVE_DIR] [-R RPM_NAME]
+		[-t TEMPLATE] [-o DISTRO] [-b BASE_PYTHON]
+		[-p PYTHON_VERSION] [--srpm] [--proxy PROXY] PACKAGE
+
+LANGUAGE	PYTHON
+
+LICENCE		MIT
+
+AUTHOR		Writen by Bohuslav "Slavek" Kabrda, Robert Kuska, Michal Cyprian
+
+			
